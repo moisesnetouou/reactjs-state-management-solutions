@@ -27,7 +27,7 @@ function checkAuthMiddleware(request: Request, response: Response, next: NextFun
   const [, token] = authorization?.split(' ');
 
   if (!token) {
-    return response 
+    return response
       .status(401)
       .json({ error: true, code: 'token.invalid', message: 'Token not present.' })
   }
@@ -40,9 +40,9 @@ function checkAuthMiddleware(request: Request, response: Response, next: NextFun
     return next();
   } catch (err) {
 
-    return response 
+    return response
       .status(401)
-      .json({  error: true, code: 'token.expired', message: 'Token invalid.' })
+      .json({ error: true, code: 'token.expired', message: 'Token invalid.' })
   }
 }
 
@@ -58,7 +58,7 @@ function addUserInformationToRequest(request: Request, response: Response, next:
   const [, token] = authorization?.split(' ');
 
   if (!token) {
-    return response 
+    return response
       .status(401)
       .json({ error: true, code: 'token.invalid', message: 'Token not present.' })
   }
@@ -70,7 +70,7 @@ function addUserInformationToRequest(request: Request, response: Response, next:
 
     return next();
   } catch (err) {
-    return response 
+    return response
       .status(401)
       .json({ error: true, code: 'token.invalid', message: 'Invalid token format.' })
   }
@@ -84,8 +84,8 @@ app.post('/sessions', (request, response) => {
   if (!user || password !== user.password) {
     return response
       .status(401)
-      .json({ 
-        error: true, 
+      .json({
+        error: true,
         message: 'E-mail or password incorrect.'
       });
   }
@@ -100,6 +100,10 @@ app.post('/sessions', (request, response) => {
     refreshToken,
     permissions: user.permissions,
     roles: user.roles,
+    user: {
+      email, permissions: user.permissions,
+      roles: user.roles,
+    }
   });
 });
 
@@ -112,8 +116,8 @@ app.post('/refresh', addUserInformationToRequest, (request, response) => {
   if (!user) {
     return response
       .status(401)
-      .json({ 
-        error: true, 
+      .json({
+        error: true,
         message: 'User not found.'
       });
   }

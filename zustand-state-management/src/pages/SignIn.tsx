@@ -1,10 +1,13 @@
 import { FormEvent, useState } from 'react';
 import { api } from '../services/api';
+import { useAuthStore } from '../store/useAuthStore';
 
 /* eslint-disable jsx-a11y/label-has-associated-control */
 export function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const { signIn } = useAuthStore();
 
   async function handleSignIn(event: FormEvent) {
     event.preventDefault();
@@ -14,7 +17,7 @@ export function SignIn() {
       password,
     });
 
-    console.log(response.data);
+    signIn(response.data.user.email);
   }
 
   return (
