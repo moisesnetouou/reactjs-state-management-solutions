@@ -1,9 +1,12 @@
+import { BrowserRouter as Router } from 'react-router-dom';
+
+import { MainRoutes } from './routes';
 import './styles/main.css';
 
 export function App() {
   return (
-    <div>
-      <h1>Zustand</h1>
-    </div>
+    <Router>
+      <MainRoutes />
+    </Router>
   );
 }
