@@ -2,6 +2,8 @@ import { FormEvent, useState } from 'react';
 import { api } from '../services/api';
 import { useAuthStore } from '../store/useAuthStore';
 
+import logoImg from '../assets/images/logo.png';
+
 /* eslint-disable jsx-a11y/label-has-associated-control */
 export function SignIn() {
   const [email, setEmail] = useState('');
@@ -23,7 +25,9 @@ export function SignIn() {
   return (
     <main className="flex h-screen w-full bg-gray-900">
       <div className="w-2/4 bg-indigo-400 flex items-center justify-center">
-        <p>Nome</p>
+        <div>
+          <img src={logoImg} alt="Logo alt" />
+        </div>
       </div>
 
       <div className="w-2/4 flex bg-gray-900 items-center justify-center">
